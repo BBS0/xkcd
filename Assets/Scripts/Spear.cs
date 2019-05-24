@@ -11,10 +11,11 @@ public class Spear : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spearboiscript = spearboi.GetComponent<SpearThrower>();
-        rb = gameObject.GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * (500f * chargelvl));
-        StartCoroutine(suicide());
+     //   spearboi = 
+      //  spearboiscript = spearboi.GetComponent<SpearThrower>();
+      //  rb = gameObject.GetComponent<Rigidbody>();
+    //    rb.AddForce(transform.forward * (500f * chargelvl));
+        //StartCoroutine(suicide());
     }
 
     // Update is called once per frame
