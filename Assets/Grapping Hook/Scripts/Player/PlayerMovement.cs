@@ -16,12 +16,12 @@ public class PlayerMovement : BaseCharacterController
 	public float speedDampTime = 0.1f;
 	
 	// The max speed of player
-	public float speedMax = 5.5f;
+	//public float speedMax = 5.5f;
 	// current used max speed
-	private float useSpeedMax;
+	//private float useSpeedMax;
 
 	// Reference to the animator component.
-	private Animator anim;
+	//private Animator anim;
 	
 	// Reference to the HashIDs.
 	private AniHashIDs hash;
@@ -34,15 +34,15 @@ public class PlayerMovement : BaseCharacterController
 	void Awake ()
 	{
 			// Setting up the references.
-			anim = GetComponent<Animator> ();
+	//		anim = GetComponent<Animator> ();
 			hash = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<AniHashIDs> ();
 	
 			// Set the weight of the shouting layer to 1.
-			anim.SetLayerWeight (1, 1f);
+		//	anim.SetLayerWeight (1, 1f);
 			// Set the weight of the shooting layer to 1.
-			anim.SetLayerWeight (2, 1f);
+			//anim.SetLayerWeight (2, 1f);
 			// set joystick for mobile device
-			InitJoystick ();
+			//InitJoystick ();
 	}
 
 	void Start ()
@@ -50,7 +50,7 @@ public class PlayerMovement : BaseCharacterController
 			// set joystick position on screen
 			resetJoystickPos ();
 			// set current max speed to default max speed
-			useSpeedMax = speedMax;
+			//useSpeedMax = speedMax;
 			// in the beginning, nowhere player wanna go 
 			targetPosition = invalidPosition;
 	}
@@ -87,15 +87,15 @@ public class PlayerMovement : BaseCharacterController
 	void MovementManagement (float horizontal, float vertical, bool sneaking, bool shooting)
 	{
 			// Set the sneaking parameter to the sneak input.
-			anim.SetBool (hash.sneakingBool, sneaking);
-			anim.SetBool (hash.shootingBool, shooting);
+			//anim.SetBool (hash.sneakingBool, sneaking);
+			//anim.SetBool (hash.shootingBool, shooting);
 	
 	
 			// If there is some axis input...
 			if (horizontal != 0f || vertical != 0f) {
 					// ... set the players rotation and set the speed parameter to max speed.
 					Rotating (new Vector3 (horizontal, 0f, vertical));
-					anim.SetFloat (hash.speedFloat, useSpeedMax, speedDampTime, Time.deltaTime);
+				//	anim.SetFloat (hash.speedFloat, useSpeedMax, speedDampTime, Time.deltaTime);
 					targetPosition = invalidPosition;
 
 			} else if (targetPosition != invalidPosition) {//go to the target position
@@ -107,21 +107,21 @@ public class PlayerMovement : BaseCharacterController
 					if (dist < 0.1f) {
 							//arrive at the destination
 							targetPosition = invalidPosition;
-							anim.SetFloat (hash.speedFloat, 0);
+					//		anim.SetFloat (hash.speedFloat, 0);
 					} else if (dist < 1.0f) {
 							//walk
 							Rotating (targetDirection);
-							anim.SetFloat (hash.speedFloat, 0.5f, speedDampTime, Time.deltaTime);
+					//		anim.SetFloat (hash.speedFloat, 0.5f, speedDampTime, Time.deltaTime);
 					} else {
 							//run
 							Rotating (targetDirection);
 							//anim.SetFloat (hash.speedFloat, useSpeedMax, speedDampTime, Time.deltaTime);
-							anim.SetFloat (hash.speedFloat, useSpeedMax);
+					//		anim.SetFloat (hash.speedFloat, useSpeedMax);
 					}
 
 			} else {
 					// Otherwise set the speed parameter to 0.
-					anim.SetFloat (hash.speedFloat, 0);
+			//		anim.SetFloat (hash.speedFloat, 0);
 			}
 	}
 
@@ -150,7 +150,7 @@ public class PlayerMovement : BaseCharacterController
 	public override bool IsMoving ()
 	{
 		// check if player is moving
-		return IsState (0, hash.locomotionState);//anim.GetCurrentAnimatorStateInfo(0).nameHash == hash.locomotionState;
+		return IsState(hash.locomotionState, 0);//anim.GetCurrentAnimatorStateInfo(0).nameHash == hash.locomotionState;
 	}
 
 	public override bool IsShooting ()
@@ -159,28 +159,30 @@ public class PlayerMovement : BaseCharacterController
 		return shooting || IsStateByTag (2, hash.shootStateTag);
 	}
 
-	private bool IsState (int layer, int state)
-	{
+	private bool IsState(int state, int layer)
+    {
+        return true;
 		// check play's state by animator state
-		return anim.GetCurrentAnimatorStateInfo (layer).nameHash == state;
+	//	return anim.GetCurrentAnimatorStateInfo (layer).nameHash == state;
 	}
 
 	private bool IsStateByTag (int layer, float tag)
 	{
+        return true;
 		// check play's state by animator tag
-		return anim.GetCurrentAnimatorStateInfo (layer).tagHash == tag;
+	//	return anim.GetCurrentAnimatorStateInfo (layer).tagHash == tag;
 	}
 
 	public override void SlowDownMovingSpeed ()
 	{
 		// slow down play moving speed
-		useSpeedMax = 2;
+	//	useSpeedMax = 2;
 	}
 
 	public override void NormalMovingSpeed ()
 	{
 		// set current max speed value
-		useSpeedMax = speedMax;
+		//useSpeedMax = speedMax;
 	}
 
 	public override void Shoot ()

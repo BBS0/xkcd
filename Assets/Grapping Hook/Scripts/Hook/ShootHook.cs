@@ -106,10 +106,10 @@ public class ShootHook : MonoBehaviour
 		#else
 
 //		if (Input.GetButton("Shoot")) {
-		if (Input.GetKey(KeyCode.Space)) {
+		if (Input.GetKey(KeyCode.G)) {
 			// shoot hook if press shoot key
 			Shooting(mTransform.rotation);
-		}else{
+		}/*
 			if(Input.GetMouseButtonDown (0)){
 				// save click position
 				slideStartTouchPos = Input.mousePosition;
@@ -129,7 +129,7 @@ public class ShootHook : MonoBehaviour
 				}
 
 			}
-		}
+		}*/
 
 		#endif		
 	}

@@ -882,7 +882,7 @@ public class Portal : MonoBehaviour {
 		}
 
 		//Unity 5.x RB FPS
-		var rbFPS = obj.GetComponent<RigidbodyFirstPersonController>();
+		var rbFPS = obj.GetComponent<RigidbodyvThirdPersonBassic>();
 		if (rbFPS) {
 			var mouseLook = rbFPS.mouseLook;
 			//Reset look script to new location.
